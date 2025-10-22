@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Scuze puiu ❤️</title>
+    <style>
+      :root {
+        --bg: #0f1724;
+        --card: #0b1220;
+        --accent: #ff6b81;
+        --muted: #9aa4b2;
+      }
+      * {
+        box-sizing: border-box;
+        font-family: Inter, ui-sans-serif, system-ui, Segoe UI, Roboto,
+          Helvetica, Arial;
+      }
+      body {
+        margin: 0;
+        background: linear-gradient(180deg, #071021 0%, #071628 60%);
+        color: #e6eef6;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+      }
+      .wrap {
+        width: 100%;
+        max-width: 920px;
+      }
+      header {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        margin-bottom: 18px;
+      }
+      header h1 {
+        margin: 0;
+        font-size: 20px;
+      }
+      header p {
+        margin: 0;
+        color: var(--muted);
+      }
+      .card {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.02),
+          rgba(255, 255, 255, 0.01)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        padding: 22px;
+        border-radius: 12px;
+        box-shadow: 0 8px 30px rgba(2, 6, 23, 0.6);
+      }
+      .question {
+        margin-bottom: 14px;
+      }
+      .question h2 {
+        font-size: 18px;
+        margin: 0 0 8px 0;
+      }
+      .options {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      button.opt {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        padding: 12px;
+        border-radius: 10px;
+        cursor: pointer;
+        color: inherit;
+        font-size: 15px;
+      }
+      button.opt:hover {
+        transform: translateY(-4px);
+        transition: transform 0.12s;
+      }
+      .status {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 16px;
+      }
+      .heart-wrap {
+        width: 120px;
+        height: 120px;
+      }
+      .meter {
+        width: 120px;
+        height: 120px;
+      }
+      .final-screen {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        padding: 36px;
+      }
+      .final-screen.show {
+        display: flex;
+      }
+      .final-screen h2 {
+        font-size: 28px;
+        margin: 18px 0 8px;
+      }
+      .final-screen p {
+        color: var(--muted);
+        margin: 0 0 12px;
+      }
+      .tiny {
+        font-size: 13px;
+        color: var(--muted);
+      }
+      #popup {
+        position: fixed;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%) translateY(20px);
+        background: rgba(255, 107, 129, 0.95);
+        color: white;
+        padding: 10px 18px;
+        border-radius: 8px;
+        font-size: 15px;
+        display: none;
+        z-index: 1000;
+        opacity: 0;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+      #popup.show {
+        display: block;
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+      @media (max-width: 640px) {
+        .options {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <div
+          style="
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #ff9aaf, #ff6b81);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #102134;
+          "
+        >
+          ♥︎
+        </div>
+        <div>
+          <h1>Mini quiz - pentru puiu ❤️</h1>
+          <p>Alege varianta corecta puiu, poate ai o surpriza la final!</p>
+        </div>
+      </header>
+      <main class="card" id="quizCard">
+        <!-- Questions -->
+        <div class="question" data-q="1">
+          <h2>1) Care e activitatea mea favorita?</h2>
+          <div class="options">
+            <button class="opt" data-correct="true">Puiu meu</button>
+            <button class="opt" data-correct="false">Bere cu baietii</button>
+            <button class="opt" data-correct="false">Sala</button>
+            <button class="opt" data-correct="false">
+              In club dupa gagici
+            </button>
+          </div>
+        </div>
+        <div class="question" data-q="2">
+          <h2>2) Cum il chema pe Ureche?</h2>
+          <div class="options">
+            <button class="opt" data-correct="true">Grigore</button>
+            <button class="opt" data-correct="false">Gheorghe</button>
+            <button class="opt" data-correct="false">Gica</button>
+            <button class="opt" data-correct="false">George</button>
+          </div>
+        </div>
+        <div class="question" data-q="3">
+          <h2>3) Ce culoare as alege?</h2>
+          <div class="options">
+            <button class="opt" data-correct="true">Roz</button>
+            <button class="opt" data-correct="false">Rosu</button>
+            <button class="opt" data-correct="false">Albastru</button>
+            <button class="opt" data-correct="false">Alb</button>
+          </div>
+        </div>
+        <div class="question" data-q="4">
+          <h2>4) Care e animalul meu preferat?</h2>
+          <div class="options">
+            <button class="opt" data-correct="true">Caine</button>
+            <button class="opt" data-correct="false">Pisica</button>
+            <button class="opt" data-correct="false">Ratusca</button>
+            <button class="opt" data-correct="false">Pui</button>
+          </div>
+        </div>
+        <div class="question" data-q="5">
+          <h2>5) Te iubesc❤️?</h2>
+          <div class="options">
+            <button class="opt" data-correct="true">Da</button>
+            <button class="opt" data-correct="false">Nu</button>
+          </div>
+        </div>
+        <div class="status">
+          <div class="heart-wrap">
+            <svg class="meter" viewBox="0 0 32 29" aria-hidden="true">
+              <defs>
+                <clipPath id="heartClip">
+                  <path
+                    d="M23.6,2.6c-2-1.6-5-1.2-6.6,0.6L16,4.2l-1-1C13.4,1.4,10.4,1,8.4,2.6C4.6,5.2,4.4,9.9,7.1,12.5L16,21l8.9-8.5C27.6,9.9,27.4,5.2,23.6,2.6z"
+                  />
+                </clipPath>
+              </defs>
+              <!-- Only fill moving up, no background/square -->
+              <g clip-path="url(#heartClip)">
+                <rect
+                  id="fillRect"
+                  x="0"
+                  y="25"
+                  width="32"
+                  height="33"
+                  fill="#ff486b"
+                  style="
+                    transform: translateY(0);
+                    transition: transform 700ms cubic-bezier(0.2, 0.8, 0.2, 1);
+                  "
+                ></rect>
+              </g>
+              <path
+                d="M23.6,2.6c-2-1.6-5-1.2-6.6,0.6L16,4.2l-1-1C13.4,1.4,10.4,1,8.4,2.6C4.6,5.2,4.4,9.9,7.1,12.5L16,21l8.9-8.5C27.6,9.9,27.4,5.2,23.6,2.6z"
+                fill="none"
+                stroke="rgba(255,255,255,0.14)"
+                stroke-width="0.8"
+              />
+            </svg>
+          </div>
+          <div>
+            <div class="tiny">
+              Tip: fiecare alegere iti poate schimba viata.
+            </div>
+          </div>
+        </div>
+      </main>
+      <section id="final" class="card final-screen" aria-hidden="true">
+        <svg width="160" height="160" viewBox="0 0 32 29" aria-hidden="true">
+          <path
+            d="M23.6,2.6c-2-1.6-5-1.2-6.6,0.6L16,4.2l-1-1C13.4,1.4,10.4,1,8.4,2.6C4.6,5.2,4.4,9.9,7.1,12.5L16,21l8.9-8.5C27.6,9.9,27.4,5.2,23.6,2.6z"
+            fill="#ff486b"
+            stroke="#fff"
+            stroke-opacity="0.12"
+          />
+        </svg>
+        <h2>Ai reusit,puiu ❤️❤️❤️</h2>
+        <p>Pentru ca indiferent ce alegi, te iubesc la fel de mult 💞</p>
+        <p>
+          Scuze ca am dormit ca lemnul, nu mi-a fost tocmai bine cand am ajuns
+          acasa si cred ca am avut nevoie de putin mai multa odihna...
+        </p>
+        <button id="restart" class="opt" style="margin-top: 14px">
+          Play again
+        </button>
+      </section>
+    </div>
+    <div id="popup">Hai ma puiu, stiu ca ma iubesti 😘</div>
+    <script>
+      const nuMessages = [
+        "Sper ca glumesti... 😢",
+        "Esti sigura? 🤔",
+        "Nu mai incerca, n-o sa mearga! 😜",
+        "Mai ai o sansa sa te razgandesti! 😉",
+      ];
+      const puiMessage = "NU ESTI ANIMAL, ESTI IUBITA MEA FRUMOASA! ❤️";
+      (function () {
+        const final = document.getElementById("final");
+        const quizCard = document.getElementById("quizCard");
+        const restart = document.getElementById("restart");
+        const popup = document.getElementById("popup");
+        const fillRect = document.getElementById("fillRect");
+        const HEART_HEIGHT = 29;
+        const questions = Array.from(document.querySelectorAll(".question"));
+        const totalQuestions = questions.length;
+        let answeredCount = 0;
+        questions.forEach((q) => {
+          q.answered = false;
+        });
+        function setFill(progress, animate = true) {
+          const p = Math.max(0, Math.min(1, progress));
+          const translateY = -p * HEART_HEIGHT;
+          if (!animate) {
+            fillRect.style.transition = "none";
+            fillRect.style.transform = `translateY(${translateY}px)`;
+            fillRect.offsetHeight;
+          } else {
+            fillRect.style.transition =
+              "transform 700ms cubic-bezier(.2,.8,.2,1)";
+            fillRect.style.transform = `translateY(${translateY}px)`;
+          }
+        }
+        setFill(0, false);
+        function showPopup(msg) {
+          popup.textContent = msg;
+          popup.classList.add("show");
+          setTimeout(() => popup.classList.remove("show"), 2200);
+        }
+        function showFinal(afterMs = 400) {
+          setFill(1, true);
+          setTimeout(() => {
+            quizCard.style.display = "none";
+            final.classList.add("show");
+            final.setAttribute("aria-hidden", "false");
+          }, afterMs + 300);
+        }
+        document.querySelectorAll("button.opt").forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            const parentQuestion = btn.closest(".question");
+            const questionNum = parseInt(
+              parentQuestion.getAttribute("data-q"),
+              10
+            );
+            const txt = btn.textContent.trim().toLowerCase();
+            if (txt === "nu") {
+              showPopup(
+                nuMessages[Math.floor(Math.random() * nuMessages.length)]
+              );
+              return;
+            }
+            if (questionNum === 4 && txt === "pui") {
+              showPopup(puiMessage);
+              return;
+            }
+            if (parentQuestion.answered) return;
+            parentQuestion.answered = true;
+            answeredCount++;
+            setFill(answeredCount / totalQuestions);
+            if (questionNum === 5 && txt === "da") {
+              showFinal(300);
+            }
+          });
+        });
+        restart.addEventListener("click", () => {
+          final.classList.remove("show");
+          quizCard.style.display = "";
+          final.setAttribute("aria-hidden", "true");
+          setFill(0, false);
+          answeredCount = 0;
+          questions.forEach((q) => {
+            q.answered = false;
+          });
+        });
+        document.addEventListener("keydown", (e) => {
+          if (
+            e.key === "Enter" &&
+            document.activeElement &&
+            document.activeElement.classList.contains("opt")
+          ) {
+            document.activeElement.click();
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
